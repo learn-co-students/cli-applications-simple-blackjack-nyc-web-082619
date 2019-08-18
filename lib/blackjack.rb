@@ -31,14 +31,17 @@ end
 def hit?(currentCardTotal)
   prompt_user()
   input = get_user_input()
-  if input == "s"
-    return currentCardTotal
-  elsif input == "h"
-    currentCardTotal += deal_card()
-    return currentCardTotal
-  else 
-    invalid_command()
-    prompt_user()
+  while (true)
+    if input == "s"
+      return currentCardTotal
+    elsif input == "h"
+      currentCardTotal += deal_card()
+      return currentCardTotal
+    else 
+      invalid_command()
+      prompt_user()
+      input = get_user_input()
+    end
   end
 end
 
@@ -51,6 +54,16 @@ end
 #####################################################
 
 def runner
-  # code runner here
+  welcome()
+  cardTotal = initial_round()
+  while cardTotal < 21
+    prompt_user()
+    input = get_user_input()
+    if input == "h"
+      cardTotal += deal_card()
+      display_card_total(cardTotal)
+    end
+  end
+  end_game(cardTotal)
 end
     
